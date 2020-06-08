@@ -6,7 +6,7 @@
 
 ### Links and Resources
 
-- [submission PR](https://github.com/marah-401-advanced-javascript/auth-server/pull/1)
+- [submission PR](https://github.com/marah-401-advanced-javascript/auth-server/pull/2)
 
 #### Documentaion
 
@@ -19,6 +19,9 @@
 - `PORT` - Port Number
 - `MONGODB_URI` - URL to the running mongo instance/db
 - `SECRET` - to generate accses token
+- `CLIENT_ID`
+- `CLIENT_SECRET`
+- `API_SERVER`
 
 
 #### Running the app
@@ -28,6 +31,8 @@
 - Endpoint: `/signup`
 - Endpoint: `/signin`
 - Endpoint: `/users`
+- Endpoint: `/oauth`
+
 
 #### Tests
 
