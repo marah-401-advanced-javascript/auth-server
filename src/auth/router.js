@@ -6,32 +6,34 @@ const basicAuth = require('./middleware/basic.js');
 
 
 router.post('/signup', signupHandler);
-router.post('/signin',basicAuth ,signinHandler);
-router.get('/users',basicAuth ,usersHandler);
+router.post('/signin', basicAuth ,signinHandler);
+router.get('/users', basicAuth ,usersHandler);
 
 
 function signupHandler(req, res) {
-  console.log('hiiiii');
   users
     .save(req.body)
     .then((userData) =>{
-        console.log(userData);
+      console.log('USER DATA:' , userData);
       const token = users.generateToken(userData);
       return token;
     })
-    .then((tokenData) =>{
-    res.json({ tokenData });
+    .then((token) =>{
+      console.log('TOKEN:' , token);
+      res.json({ token });
     })
-    .catch((err) =>res.status(403));
+    .catch((err) =>res.status(403).send('ERRORRRRR'));
 }
   
 function signinHandler(req,res){
-  res.json({ token: req.token });
-      
+  res.json({ token: req.token , user: req.user });
+
 }
 
-function usersHandler(req, res) {
-  res.json(users.list());
+async function usersHandler(req, res) {
+  return await users.get().then((result)=>{
+    res.json(result);
+  });
 }
 
 module.exports = router;

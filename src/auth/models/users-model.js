@@ -5,48 +5,37 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const SECRET = process.env.SECRET || 'mysecret';
 const userschema = require('./users-schema.js');
+const Model = require('./mongo.js');
 
-class Model {
-  constructor(schema) {
-    this.schema = schema;
-  }
   
+class Users extends Model {
+  constructor() {
+    super(userschema);
+  }
+
   async save(record) {
-    console.log(record);
+    console.log('record befor hash',record);
 
-    let myUser =await this.schema.find({ username: record.username } );
+    let myUser = await this.get({ username: record.username } );
 
-    if(!myUser){
-    const newRecord = new this.schema(record);
-        console.log(newRecord);
-      newRecord.password = await bcrypt.hash(newRecord.password, 5);
-      newRecord.username = newRecord;
-      return newRecord.save();
+    if(myUser.length === 0){
+      record.password = await bcrypt.hash(record.password, 5);
+      console.log('record after hash',record);
+      return await this.create(record);
     }
     return Promise.reject(); // ==>.catch
   }
 
   async authenticateBasic(user,pass) {
-    const valid = await bcrypt.compare(pass, user.password);
-    return valid ? user : Promise.reject('wrong password');
+    const myUser = await this.get({username : user});
+    const valid = await bcrypt.compare(pass, myUser[0].password);
+    return valid ? myUser : Promise.reject('wrong password');
   }
 
-  async generateToken(user) {
-    const token = await jwt.sign({ username: user.username }, SECRET);
+  generateToken(user) {
+    const token =  jwt.sign({ username: user.username }, SECRET);
     return token;
   }
-
-  list() {
-    return this.schema.find();
-  }
 }
-
-
-class Users extends Model {
-  constructor() {
-    super(userschema);
-  }
-}
-
 
 module.exports = new Users();
