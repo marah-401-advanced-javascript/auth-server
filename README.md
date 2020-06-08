@@ -6,7 +6,7 @@
 
 ### Links and Resources
 
-- [submission PR](https://github.com/marah-401-advanced-javascript/lab-00/pull/1)
+- [submission PR](https://github.com/marah-401-advanced-javascript/auth-server/pull/1)
 
 #### Documentaion
 
