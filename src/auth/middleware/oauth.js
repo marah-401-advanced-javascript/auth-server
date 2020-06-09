@@ -20,7 +20,7 @@ module.exports = async (req, res, next) => {
     req.token = token;
     next();
   } catch (err) {
-    next(err.message);
+    next(err);
   }
 };
 
