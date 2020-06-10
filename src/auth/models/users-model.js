@@ -6,7 +6,12 @@ require('dotenv').config();
 const SECRET = process.env.SECRET || 'mysecret';
 const userschema = require('./users-schema.js');
 const Model = require('./mongo.js');
-
+const capabilities ={
+  user : ['read'],
+  writer : ['read','create'],
+  editor : ['read','create','update'],
+  admin : ['read','create','update','delete'],
+};
   
 class Users extends Model {
   constructor() {
@@ -40,6 +45,8 @@ class Users extends Model {
       exp: Math.floor(Date.now() / 1000) + (15 * 60),
       algorithm: 'RS384',
       id : user._id,
+      role : user.role,
+      capabilities : capabilities[user.role],// capabilities[user.role]
     }, SECRET);
     return token;
   }

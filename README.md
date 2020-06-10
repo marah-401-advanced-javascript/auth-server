@@ -6,7 +6,7 @@
 
 ### Links and Resources
 
-- [submission PR](https://github.com/marah-401-advanced-javascript/auth-server/pull/3)
+- [submission PR](https://github.com/marah-401-advanced-javascript/auth-server/pull/4)
 
 #### Documentaion
 
@@ -27,11 +27,18 @@
 #### Running the app
 
 - `npm start`
-- Endpoint: `/`
-- Endpoint: `/signup`
-- Endpoint: `/signin`
-- Endpoint: `/users`
-- Endpoint: `/oauth`
+- Endpoint: `/` 
+- Endpoint: `/signup` >> POST
+- Endpoint: `/signin` >> POST
+- Endpoint: `/users` >> GET
+- Endpoint: `/oauth` >> GET
+- Endpoint: `/secret` >> GET
+- Endpoint: `/add` >> POST
+- Endpoint: `/change` >> PUT
+- Endpoint: `/read` >> GET
+- Endpoint: `/remove` >> DELETE
+
+
 
 
 #### Tests
