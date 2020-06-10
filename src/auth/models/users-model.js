@@ -43,7 +43,7 @@ class Users extends Model {
     const token =  jwt.sign({ 
       username: user.username,
       exp: Math.floor(Date.now() / 1000) + (15 * 60),
-      algorithm: 'RS384',
+      algorithm: 'HS256',
       id : user._id,
       role : user.role,
       capabilities : capabilities[user.role],// capabilities[user.role]
@@ -64,6 +64,16 @@ class Users extends Model {
       }
     } catch (e) {
       return Promise.reject(e.message);
+    }
+  }
+
+
+  can(permision){
+    if(permision){
+      return Promise.resolve(true);
+    }
+    else{
+      return Promise.resolve(false);
     }
   }
 
