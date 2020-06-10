@@ -9,6 +9,7 @@ const middleNotFound = require('./middleware/404.js');
 const middleError = require('./middleware/500.js');
 const app = express();
 const path = require('path');
+const extraRoutes = require('./extra-routes.js');
 
 
 
@@ -26,7 +27,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
 });
 app.use(router);
-
+app.use(extraRoutes);
 
 
 // errors middleware
