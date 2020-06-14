@@ -4,18 +4,22 @@ const users = require('../models/users-model');
 
 
 module.exports = (req, res, next) => {
+  console.log(req.headers.authorization);
   if (!req.headers.authorization) {
     next('Invalid Login no auth headers');
   } else {
+    console.log=('hiii');
     const [auth, token] = req.headers.authorization.split(' ');
+    console.log=('TOKEN' , token);
     if (auth === 'Bearer') {
-      users
-        .authenticateToken(token)
-        .then((validUser) => {
-          req.user = validUser;
-          next();
-        })
-        .catch((e) => next('Invalid login', e.message));
+      // users
+      // .authenticateToken(token)
+      // .then((validUser) => {
+      //   req.user = validUser[0];
+      console.log('heloooooooooooooo');
+      next();
+      // })
+      // .catch((e) => next('HIIIIIIII'));
     } else {
       next('Invalid auth header');
     }

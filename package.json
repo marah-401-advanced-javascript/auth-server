@@ -1,7 +1,7 @@
 {
   "name": "auth-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "## Project: auth-server",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
