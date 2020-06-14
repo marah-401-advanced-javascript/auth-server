@@ -15,11 +15,11 @@ module.exports = (req, res, next) => {
       users
         .authenticateToken(token)
         .then((validUser) => {
-          req.user = validUser[0];
+          req.user = validUser;
           console.log('heloooooooooooooo');
           next();
         })
-        .catch((e) => next('HIIIIIIII'));
+        .catch((e) => next('Invalid login', e.message));
     } else {
       next('Invalid auth header');
     }
