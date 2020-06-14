@@ -14,3 +14,4 @@ module.exports = (capability) => {//when the middleware has an arg
     });
   };
 };
+

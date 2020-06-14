@@ -12,14 +12,14 @@ module.exports = (req, res, next) => {
     const [auth, token] = req.headers.authorization.split(' ');
     console.log=('TOKEN' , token);
     if (auth === 'Bearer') {
-      // users
-      // .authenticateToken(token)
-      // .then((validUser) => {
-      //   req.user = validUser[0];
-      console.log('heloooooooooooooo');
-      next();
-      // })
-      // .catch((e) => next('HIIIIIIII'));
+      users
+        .authenticateToken(token)
+        .then((validUser) => {
+          req.user = validUser[0];
+          console.log('heloooooooooooooo');
+          next();
+        })
+        .catch((e) => next('HIIIIIIII'));
     } else {
       next('Invalid auth header');
     }
